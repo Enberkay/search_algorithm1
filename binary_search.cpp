@@ -1,9 +1,11 @@
-// Uninformed (Blind) Search
-// ไม่รู้ข้อมูลล่วงหน้า ไม่มี heuristic (เดาไม่ได้ว่าทางไหนดีกว่า)
+/*
+Uninformed (Blind) Search
+ไม่รู้ข้อมูลล่วงหน้า ไม่มี heuristic (เดาไม่ได้ว่าทางไหนดีกว่า)
 
-// Binary Search คือการค้นหาใน array ที่เรียงลำดับแล้วเท่านั้น (sorted)
-// โดยการแบ่งครึ่งซ้าย–ขวา ไปเรื่อย ๆ เพื่อหาค่าที่ต้องการ
-// เร็วกว่า Linear Search มาก (เวลา O(log n))
+Binary Search คือการค้นหาใน array ที่เรียงลำดับแล้วเท่านั้น (sorted)
+โดยการแบ่งครึ่งซ้าย–ขวา ไปเรื่อย ๆ เพื่อหาค่าที่ต้องการ
+เร็วกว่า Linear Search มาก (เวลา O(log n))
+*/
 
 #include <iostream>
 using namespace std;
