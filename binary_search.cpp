@@ -34,15 +34,15 @@ int main() {
     int size = sizeof(data) / sizeof(data[0]);
 
     int target;
-    cout << "ป้อนค่าที่ต้องการค้นหา: ";
+    cout << "fill in what u want to search: ";
     cin >> target;
 
     int result = binarySearch(data, size, target);
 
     if (result != -1) {
-        cout << "เจอค่า " << target << " ที่ตำแหน่ง index " << result << endl;
+        cout << "เจอค่า " << target << " at index " << result << endl;
     } else {
-        cout << "ไม่พบค่าที่ต้องการค้นหาใน array" << endl;
+        cout << "Not found value in array" << endl;
     }
 
     return 0;
