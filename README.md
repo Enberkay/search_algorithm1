@@ -1,92 +1,164 @@
-# 🔍 Uninformed (Blind) Search Algorithms – สรุปฉบับเต็ม
+# Search Algorithms - Complete Collection
 
-**Uninformed Search** หรือที่เรียกว่า **Blind Search**  
-คือกลุ่มของอัลกอริธึมค้นหาที่ **ไม่ใช้ heuristic หรือความรู้ล่วงหน้า**  
-เหมาะกับสถานการณ์ที่เรารู้โครงสร้างของข้อมูล (เช่น graph, tree, array)  
-แต่ **ไม่รู้ว่าเส้นทางไหนดีที่สุด** จึงต้องลองเดินหลายทาง
+This repository contains implementations of various search algorithms categorized into two main types: **Uninformed Search** and **Informed Search**.
 
----
+## Repository Structure
 
-## ✅ รายชื่ออัลกอริธึม (6 ตัวหลัก)
+```
+search_algorithm1/
+├── README.md                    # Comprehensive overview
+├── uninformed_search/           # 6 blind search algorithms
+│   ├── linear_search.cpp
+│   ├── binary_search.cpp
+│   ├── breadth_first_search.cpp
+│   ├── depth_first_search.cpp
+│   ├── uniform_const_search.cpp
+│   └── iterative_deepening_depth_first_search.cpp
+└── informed_search/             # 4 heuristic search algorithms
+    ├── a_star_search.cpp
+    ├── greedy_best_first_search.cpp
+    ├── bidirectional_search.cpp
+    └── ida_star_search.cpp
+```
 
-| No. | ชื่ออัลกอริธึม | โครงสร้างที่ใช้ | เหมาะกับสถานการณ์ |
-|-----|-----------------|------------------|----------------------|
-| 1️⃣  | Linear Search   | Array loop       | ค้นหาค่าใน list ที่ยังไม่เรียง |
-| 2️⃣  | Binary Search   | Sorted array     | ค้นหาค่าใน list ที่เรียงแล้ว |
-| 3️⃣  | BFS             | Queue            | หา path ที่ใกล้ที่สุดใน graph ที่ไม่มี weight |
-| 4️⃣  | DFS             | Stack / Recursion| สำรวจทุก node หรือตรวจ loop/cycle |
-| 5️⃣  | Uniform Cost Search (UCS) | Priority Queue | หา path ที่ cost น้อยสุดใน graph ที่มี weight |
-| 6️⃣  | Iterative Deepening DFS (IDS / IDDFS) | DFS + loop ตาม depth | ใช้ memory น้อย + หา path ใกล้สุด |
+## Algorithm Categories
 
----
+### 1. Uninformed Search (Blind Search)
+Algorithms that do not use any heuristic or prior knowledge about the problem structure. They explore the search space systematically without any guidance.
 
-## 🧠 เทคนิคการจำแบบเร็ว
+**Location**: `uninformed_search/` folder
 
-| คำจำง่าย | อธิบาย |
-|----------|--------|
-| 🔢 **Linear** = ดูทีละตัว |
-| 🪜 **Binary** = หารครึ่ง ต้องเรียงก่อน |
-| 🌊 **BFS** = สำรวจแบบคลื่น กระจายกว้างก่อน |
-| 🕳️ **DFS** = มุดลึกก่อน ค่อยย้อนกลับ |
-| 💸 **UCS** = ไปทางที่ “ถูกที่สุด” ก่อน (priority) |
-| ⏳ **IDS** = ลึกทีละระดับ, ปลอดภัย, ประหยัด memory |
+#### Array Search Algorithms
+| Algorithm | File | Description | Time Complexity | Best For |
+|-----------|------|-------------|-----------------|----------|
+| Linear Search | `linear_search.cpp` | Searches array sequentially from left to right | O(n) | Unsorted arrays |
+| Binary Search | `binary_search.cpp` | Divides array in half repeatedly | O(log n) | Sorted arrays |
 
----
+#### Graph/Tree Search Algorithms
+| Algorithm | File | Description | Time Complexity | Best For |
+|-----------|------|-------------|-----------------|----------|
+| Breadth-First Search (BFS) | `breadth_first_search.cpp` | Explores level by level using queue | O(V + E) | Shortest path (unweighted) |
+| Depth-First Search (DFS) | `depth_first_search.cpp` | Explores deep paths using recursion/stack | O(V + E) | Complete exploration, cycle detection |
+| Uniform Cost Search (UCS) | `uniform_const_search.cpp` | BFS with weighted edges using priority queue | O(E log V) | Shortest path (weighted) |
+| Iterative Deepening DFS (IDS) | `iterative_deepening_depth_first_search.cpp` | DFS with increasing depth limits | O(b^d) | Memory-efficient shortest path |
 
-## 🎯 วิธีเลือกใช้งานในสถานการณ์ต่าง ๆ
+### 2. Informed Search (Heuristic Search)
+Algorithms that use heuristic functions to guide the search towards the goal more efficiently.
 
-| สถานการณ์ | ใช้อะไรดี | เหตุผล |
-|------------|------------|--------|
-| หาค่าหนึ่งใน array ที่ยังไม่เรียง | `Linear Search` | ใช้ง่าย ไม่ต้องเรียง |
-| หาค่าหนึ่งใน array ที่เรียงแล้ว | `Binary Search` | เร็วมาก O(log n) |
-| หา path ที่ใกล้สุด (ไม่มี weight) | `BFS` | BFS หาทางที่ใกล้สุดแน่นอน |
-| สำรวจทุก node, หาความลึก, ตรวจ loop | `DFS` | ใช้ recursion ได้ง่าย |
-| หาเส้นทางที่ cost ต่ำสุด (มี weight) | `UCS` | คล้าย Dijkstra, เลือก cost ต่ำสุดก่อน |
-| อยากได้ path ที่ใกล้สุด + ใช้ memory น้อย | `IDS` | DFS ที่ทำซ้ำโดยจำกัดความลึก |
+**Location**: `informed_search/` folder
 
----
+| Algorithm | File | Description | Time Complexity | Best For |
+|-----------|------|-------------|-----------------|----------|
+| A* Search | `a_star_search.cpp` | Uses f(n) = g(n) + h(n) with priority queue | O(E log V) | Optimal path finding |
+| Greedy Best-First Search | `greedy_best_first_search.cpp` | Uses only heuristic h(n) | O(E log V) | Fast but not always optimal |
+| Bidirectional Search | `bidirectional_search.cpp` | Searches from both start and goal | O(b^(d/2)) | Faster than unidirectional |
+| IDA* Search | `ida_star_search.cpp` | A* with iterative deepening | O(b^d) | Memory-efficient A* |
 
-## ⚠️ หมายเหตุพิเศษ
+## Key Differences
 
-- UCS = BFS + cost  
-- IDS = DFS + จำกัดลึก  
-- BFS = ดีแต่ใช้ memory เยอะ  
-- DFS = ประหยัด memory แต่เสี่ยงหลงลึก  
-- IDS = ทางสายกลางที่ยอดเยี่ยม!  
-- Binary Search ใช้ไม่ได้ถ้า array ไม่เรียง!
+### Uninformed vs Informed Search
 
----
+| Aspect | Uninformed Search | Informed Search |
+|--------|-------------------|-----------------|
+| **Heuristic Usage** | No heuristic function | Uses heuristic h(n) |
+| **Search Efficiency** | Systematic but may be slow | Guided and typically faster |
+| **Optimality** | May not find optimal path | Often finds optimal path |
+| **Memory Usage** | Varies by algorithm | Generally higher |
+| **Implementation** | Simpler to implement | More complex with heuristics |
 
-## 📚 เวลาในการทำงานโดยประมาณ
+### Array vs Graph Search
 
-| Algorithm | Time Complexity | Space Complexity |
-|-----------|-----------------|------------------|
-| Linear Search | O(n)         | O(1)             |
-| Binary Search | O(log n)     | O(1)             |
-| BFS            | O(V + E)     | O(V)             |
-| DFS            | O(V + E)     | O(V)             |
-| UCS            | O(E log V)   | O(V)             |
-| IDS            | O(b^d)       | O(d)             |
+| Type | Data Structure | Algorithms | Use Cases |
+|------|----------------|------------|----------|
+| **Array Search** | Linear data structures | Linear, Binary | Database queries, list operations |
+| **Graph Search** | Connected nodes/vertices | BFS, DFS, A*, etc. | Pathfinding, AI, network analysis |
 
-- V = จำนวน node, E = จำนวน edge
-- b = branching factor (จำนวนทางเลือกต่อ node)
-- d = ความลึกของคำตอบ
+## Algorithm Selection Guide
 
----
+### For Array Operations
+- **Unsorted array**: Use Linear Search
+- **Sorted array**: Use Binary Search (much faster)
 
-## 🧪 ตัวอย่างการนำไปใช้จริง
+### For Graph Problems
+- **Shortest path (unweighted)**: Use BFS
+- **Complete exploration**: Use DFS
+- **Shortest path (weighted)**: Use UCS or A*
+- **Memory constraints**: Use IDS or IDA*
+- **Bidirectional search**: Use Bidirectional Search
 
-- 📦 **ระบบแนะนำสินค้า:** ใช้ BFS/DFS เพื่อค้นหาความสัมพันธ์
-- 🧭 **หุ่นยนต์เดินทาง:** ใช้ UCS หรือ A* เพื่อหาทางที่ cost ต่ำสุด
-- 🧠 **ปัญหาทางปัญญา (AI)**: IDS ดีมากในเกมที่ลึกแต่หน่วยความจำน้อย
-- 📊 **ค้นหาข้อมูลใน dataset:** Binary Search ถ้าเรียงแล้ว, Linear Search ถ้าไม่เรียง
+### For AI/Game Problems
+- **Pathfinding with heuristics**: Use A*
+- **Fast but approximate**: Use Greedy Best-First
+- **Memory-efficient optimal**: Use IDA*
 
----
+## Complexity Analysis
 
-## 🚀 พร้อมต่อยอด?
-- UCS + Heuristic = **A\* (A-star) Search**
-- BFS + ความฉลาด = **Greedy Best-First Search**
-- หากอยากฉลาดมากขึ้น → ไปกลุ่ม **Informed Search**
+### Time Complexity
+| Algorithm | Best Case | Average Case | Worst Case |
+|-----------|-----------|--------------|------------|
+| Linear Search | O(1) | O(n) | O(n) |
+| Binary Search | O(1) | O(log n) | O(log n) |
+| BFS | O(1) | O(V + E) | O(V + E) |
+| DFS | O(1) | O(V + E) | O(V + E) |
+| UCS | O(1) | O(E log V) | O(E log V) |
+| A* | O(1) | O(E log V) | O(E log V) |
 
----
+### Space Complexity
+| Algorithm | Space Complexity | Notes |
+|-----------|------------------|-------|
+| Linear Search | O(1) | Constant extra space |
+| Binary Search | O(1) | Constant extra space |
+| BFS | O(V) | Queue size |
+| DFS | O(V) | Stack/recursion depth |
+| UCS | O(V) | Priority queue |
+| A* | O(V) | Priority queue |
+
+## Implementation Notes
+
+### Common Data Structures Used
+- **Queue**: BFS, Bidirectional Search
+- **Stack/Recursion**: DFS, IDS
+- **Priority Queue**: UCS, A*, Greedy Best-First
+- **Hash Set/Array**: Visited tracking
+
+### Key Concepts
+- **Heuristic Function h(n)**: Estimates distance to goal
+- **Cost Function g(n)**: Actual cost from start to current node
+- **Evaluation Function f(n)**: f(n) = g(n) + h(n) for A*
+- **Admissible Heuristic**: Never overestimates true cost
+- **Consistent Heuristic**: h(n) ≤ cost(n,n') + h(n') for all neighbors
+
+## Usage Examples
+
+Each algorithm file contains:
+- Complete C++ implementation
+- Detailed comments explaining the logic
+- Example usage with sample data
+- Complexity analysis
+- Comparison with other algorithms
+
+## Compilation and Running
+
+All files are written in C++ and can be compiled using:
+```bash
+# For uninformed search algorithms
+cd uninformed_search
+g++ -o algorithm_name algorithm_name.cpp
+./algorithm_name
+
+# For informed search algorithms
+cd informed_search
+g++ -o algorithm_name algorithm_name.cpp
+./algorithm_name
+```
+
+## Contributing
+
+Feel free to add more search algorithms or improve existing implementations. Please maintain the same documentation style and include complexity analysis.
+
+## Navigation
+
+- **Uninformed Search Algorithms**: See `uninformed_search/` folder
+- **Informed Search Algorithms**: See `informed_search/` folder
+- **Main README**: This file provides overview and comparisons
 
